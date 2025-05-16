@@ -1,2 +1,1 @@
-# datavision
-ƊⱭȾɅViƧi🧿Ƞ&amp;trade;
+# ƊⱭȾɅViƧi🧿Ƞ&trade;
