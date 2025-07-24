@@ -42,7 +42,7 @@ generation_config = {'candidate_count'  : 1,
                      'top_p'            : 0.95,
                      'top_k'            : 3,
                      'stop_sequences'   : None,
-                     'max_output_tokens': 16384}
+                     'max_output_tokens': 8192}
 safety_settings   = {'HATE'             :'BLOCK_ONLY_HIGH',
                      'HARASSMENT'       :'BLOCK_ONLY_HIGH',
                      'SEXUAL'           :'BLOCK_ONLY_HIGH',
@@ -79,7 +79,7 @@ if 'message' not in st.session_state:
 for message    in   st.session_state.messages:
         avatar  =   hm_avatar   if  message['role']=='human' else ai_avatar
         with        st.chat_message(message['role']        , avatar =avatar):st.write(message['content'])
-if query       :=   st.chat_input(placeholder='Digite a mensagem aqui…', max_chars=None, disabled=False, on_submit=None):
+if query       :=   st.chat_input(placeholder='Digite aqui sua mensagem…' , max_chars=None, disabled=False, on_submit=None):
         with        st.chat_message('human', avatar='👨🏻‍⚕️'):                   st.write(query)
         st .session_state.messages.append({'role':'human','content':query})
         with        st.chat_message('ai'):response=chat.send_message(system_instruction.format(query=query))
