@@ -70,11 +70,11 @@ model           =genai.GenerativeModel(model_name        =     model_name,
                                        tools             =    tools )
 # Chat:
 chat            =model.start_chat  (enable_automatic_function_calling=False)
-start           = chat.send_message(system_instruction.format(query='Prompt'))
+start           = chat.send_message(system_instruction.format(query='prompt'))
 ai_avatar       ='👨‍⚕️'
 hm_avatar       ='👨🏻‍⚕️'
 if 'message' not in st.session_state:
-        with        st.chat_message('ai', avatar='👨‍⚕️'):
+        with        st.chat_message('ai'   , avatar='👨‍⚕️'):
                     st.write(start.text)
 for message    in   st.session_state.messages:
         avatar  =   hm_avatar   if  message['role']=='human' else ai_avatar
