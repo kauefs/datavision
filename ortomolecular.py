@@ -63,11 +63,11 @@ system_instruction='''
                       {query}
 
                    '''
-model             =genai.GenerativeModel(model_name        =     model_name,
-                                         generation_config =generation_config,
-                                         safety_settings   =    safety_settings,
-                                         system_instruction=    system_instruction,
-                                         tools             =    tools )
+model           =genai.GenerativeModel(model_name        =     model_name,
+                                       generation_config =generation_config,
+                                       safety_settings   =    safety_settings,
+                                       system_instruction=    system_instruction,
+                                       tools             =    tools )
 # Chat:
 chat            =model.start_chat  (enable_automatic_function_calling=False)
 start           = chat.send_message(system_instruction.format(query='Prompt'))
