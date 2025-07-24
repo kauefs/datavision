@@ -79,8 +79,8 @@ if 'message' not in st.session_state:
 for message    in   st.session_state.messages:
         avatar  =   hm_avatar   if  message['role']=='human' else ai_avatar
         with        st.chat_message(message['role']        , avatar =avatar):st.write(message['content'])
-if query       :=   st.chat_input(placeholder='Type message here…', max_chars=None, disabled=False, on_submit=None):
-        with        st.chat_message('human', avatar='👨🏻‍⚕️'):                    st.write(query)
+if query       :=   st.chat_input(placeholder='Digite a mensagem aqui…', max_chars=None, disabled=False, on_submit=None):
+        with        st.chat_message('human', avatar='👨🏻‍⚕️'):                   st.write(query)
         st .session_state.messages.append({'role':'human','content':query})
         with        st.chat_message('ai'):response=chat.send_message(system_instruction.format(query=query))
         st .session_state.messages.append({'role':'ai','content':response.text})
