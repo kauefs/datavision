@@ -19,6 +19,8 @@ def send( ):
     else:st.session_state.warning=st.warning('Try a prompt first.')
 # API-KEY:
 api_key=st.secrets['api_key']
+model  ='gemini-2.5-flash-lite'
+max_output_tokens =16384
 safety_settings={HarmCategory.HARM_CATEGORY_HARASSMENT       :HarmBlockThreshold.BLOCK_ONLY_HIGH,
                  HarmCategory.HARM_CATEGORY_HATE_SPEECH      :HarmBlockThreshold.BLOCK_ONLY_HIGH,
                  HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT:HarmBlockThreshold.BLOCK_ONLY_HIGH,
@@ -37,9 +39,9 @@ system_instruction='''
                         * friendly and warm in your interactions.
                         * efficient and resourceful in providing information and solutions.
                    '''
-LLM=ChatGoogleGenerativeAI(model  ='gemini-2.5-flash-lite',
+LLM=ChatGoogleGenerativeAI(model  =model,
                            api_key=api_key,
-                           max_output_tokens =16384,
+                           max_output_tokens =max_output_tokens,
                            safety_settings   =safety_settings,
                            system_instruction=system_instruction)
 # SIDE
