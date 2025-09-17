@@ -1,7 +1,7 @@
 import streamlit                              as   st
 from langchain_google_genai.chat_models     import ChatGoogleGenerativeAI
 from google.generativeai.types.safety_types import HarmBlockThreshold, HarmCategory
-st.set_page_config(page_title='LLM', page_icon='📱', layout='wide', initial_sidebar_state='expanded')
+st.set_page_config(page_title='LLM', page_icon='📱', layout='wide', initial_sidebar_state='auto')
 #  Session State:
 st.session_state.setdefault('messages',[])
 st.session_state.setdefault( 'prompt' ,'')
