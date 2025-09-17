@@ -40,4 +40,5 @@ google-ai-generativelanguage
 #langchain
 #langchain-community
 #langchain-experimental
+langchain-google-genai
 #langchain-openai
