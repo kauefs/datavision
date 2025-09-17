@@ -1,6 +1,4 @@
-# import os
 import streamlit                              as   st
-# from                 dotenv.main            import load_dotenv
 from langchain_google_genai.chat_models     import ChatGoogleGenerativeAI
 from google.generativeai.types.safety_types import HarmBlockThreshold, HarmCategory
 st.set_page_config(page_title='LLM', page_icon='📱', layout='wide', initial_sidebar_state='expanded')
@@ -21,8 +19,6 @@ def send( ):
     else:st.session_state.warning=st.warning('Try a prompt first.')
 # API-KEY:
 api_key=st.secrets['api_key']
-# load_dotenv( )
-# api_key=os.getenv('api_key','')
 safety_settings={HarmCategory.HARM_CATEGORY_HARASSMENT       :HarmBlockThreshold.BLOCK_ONLY_HIGH,
                  HarmCategory.HARM_CATEGORY_HATE_SPEECH      :HarmBlockThreshold.BLOCK_ONLY_HIGH,
                  HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT:HarmBlockThreshold.BLOCK_ONLY_HIGH,
@@ -68,14 +64,14 @@ if st.session_state.messages and st.session_state.messages[-1]['role']=='user':
             st.session_state.messages.append({'role':'llm','content':response.content,'avatar':'🐼'})
 st.sidebar.divider (       )
 st.sidebar.markdown('''
-![2025.09.17  ](https://img.shields.io/badge/2025.09.17-000000)
+![2025.09.17   ](https://img.shields.io/badge/2025.09.17-000000)
 
-[![GitHub     ](https://img.shields.io/badge/-000000?logo=github&logoColor=FFFFFF)](https://github.com/kauefs/)
-[![Medium     ](https://img.shields.io/badge/-000000?logo=medium&logoColor=FFFFFF)](https://medium.com/@kauefs)
-[![LinkedIn   ](https://img.shields.io/badge/in-0077B5?logo=linkedin&logoColor=FFFFFF)](https://www.linkedin.com/in/kauefs/)
-[![Python     ](https://img.shields.io/badge/3-646464?logo=python&logoColor=FFDE57&labelColor=4584B6)](https://www.python.org/)
+[![GitHub      ](https://img.shields.io/badge/-000000?logo=github&logoColor=FFFFFF)](https://github.com/kauefs/)
+[![Medium      ](https://img.shields.io/badge/-000000?logo=medium&logoColor=FFFFFF)](https://medium.com/@kauefs)
+[![LinkedIn    ](https://img.shields.io/badge/in-0077B5?logo=linkedin&logoColor=FFFFFF)](https://www.linkedin.com/in/kauefs/)
+[![Python      ](https://img.shields.io/badge/3-646464?logo=python&logoColor=FFDE57&labelColor=4584B6)](https://www.python.org/)
 
-[![License    ](https://img.shields.io/badge/Apache--2.0-D22128?style=flat&logo=apache&logoColor=CB2138&label=License&labelColor=6D6E71&color=D22128)](https://www.apache.org/licenses/LICENSE-2.0)
+[![License     ](https://img.shields.io/badge/Apache--2.0-D22128?style=flat&logo=apache&logoColor=CB2138&label=License&labelColor=6D6E71&color=D22128)](https://www.apache.org/licenses/LICENSE-2.0)
 
 [![ƊⱭȾɅViƧi🧿Ƞ](https://img.shields.io/badge/ƊⱭȾɅViƧi🧿Ƞ&trade;-0065FF?style=plastic&label=&copy;2025&labelColor=0065FF)](https://datavision.one/)
                     ''')
@@ -83,10 +79,4 @@ st.sidebar.markdown('''
 st.title('LangChainLLM')
 for message in st.session_state.messages:
     with       st.chat_message(message['role'], avatar=message['avatar']):st.markdown(message['content'])
-prompt=        st.text_area('**PromptBox**', key='prompt', value=st.session_state.prompt)
-# prompt=      st.text_area('**Prompt:**')
-# if           st.button   ( '**Send**'  ):
-#     if   prompt.strip    (             ):
-#         with st.spinner  ('Processing…'):response=LLM.invoke(prompt)
-#         st     .write    (               response.content)
-#     else:    st.warning  ('Try a prompt first.')
+prompt     =   st.text_area('**PromptBox**', key='prompt', value=st.session_state.prompt)
