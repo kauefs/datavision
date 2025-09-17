@@ -36,7 +36,7 @@ st.header   ('Medicina'     )
 st.subheader('Ortomolecular')
 st.divider  (    )
 # Model:
-model_name        =  'gemini-2.0-flash'
+model_name        =  'gemini-2.5-flash-lite'
 generation_config = {'candidate_count'  : 1,
                      'temperature'      : 0.75,
                      'top_p'            : 0.95,
