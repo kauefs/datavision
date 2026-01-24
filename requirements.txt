@@ -9,7 +9,7 @@ matplotlib
 seaborn
 pydeck
 plotly
-altair
+altair<5
 yfinance
 mplfinance
 datetime
@@ -18,7 +18,7 @@ folium
 scipy
 scikit-learn
 tensorflow
-streamlit==1.41.0
+streamlit>1.49.0
 streamlit_folium
 streamlit-bokeh
 streamlit_image_coordinates
