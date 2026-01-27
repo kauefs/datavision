@@ -34,10 +34,10 @@ st.subheader(    'ƊⱭȾɅ Assistant')
 st.divider( )
 # Model:
 model_name        =  'gemini-2.5-flash-lite'
-generation_config = {'candidate_count'  : 1,
-                     'temperature'      : .75,
-                     'top_p'            : .95,
-                     'top_k'            : 3,
+generation_config = {'candidate_count'  : 1   ,
+                     'temperature'      :  .75,
+                     'top_p'            :  .95,
+                     'top_k'            : 3   ,
                      'stop_sequences'   : None,
                      'max_output_tokens': 16384}
 safety_settings   = {'HATE'             :'BLOCK_ONLY_HIGH',
@@ -85,11 +85,11 @@ for message   in      st.session_state.messages:
 # Chat InPut:
 if query         :=   st.   chat_input(placeholder='Type message here…', max_chars=None, disabled=False, on_submit=None):
     # User Query:
-    with              st.   chat_message(            'user' , avatar=hm_avatar)      :st.markdown(query)
+    with              st.   chat_message(         'user' , avatar=hm_avatar)      :st.markdown(query)
     st.session_state    .messages.append({'role' :'user' , 'content':query})
     # Assistant Response:
-    with              st.   chat_message('assistant'        , avatar=ai_avatar):
-        response  =   st.session_state.chat.send_message(query)
+    with              st.   chat_message('assistant'     , avatar=ai_avatar):
+        response  =   st.session_state.chat.send_message            (query)
         st.markdown(response.text)
     st.session_state    .messages.append({'role':'assistant','content':response.text})
 st.toast('ƊⱭȾɅViƧi🧿Ƞ&trade;', icon='🧿')
