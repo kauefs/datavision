@@ -61,11 +61,11 @@ system_instruction='''
                       {query}
 
                    '''
-model             =genai.GenerativeModel(model_name        =     model_name,
-                                         generation_config =generation_config,
-                                         safety_settings   =    safety_settings,
-                                         system_instruction=    system_instruction,
-                                         tools             =    tools )
+model             =genai.GenerativeModel(model_name       =     model_name,
+                                    generation_config     =generation_config,
+                                        safety_settings   =    safety_settings,
+                                        system_instruction=    system_instruction,
+                                         tools            =     tools)
 # Chat:
 ai_avatar         ='🧿'
 hm_avatar         ='🧐'
@@ -81,12 +81,12 @@ if not st.session_state.greetings:
     st.session_state    .greetings= True
 # Chat History:
 for message   in      st.session_state.messages:
-    with              st.chat_message(message    ['role'], avatar=message['role']):st.markdown(message['content'])
+    with              st.chat_message(message     ['role'], avatar=message['role']):st.markdown(message['content'])
 # Chat InPut:
 if query         :=   st.   chat_input(placeholder='Type message here…', max_chars=None, disabled=False, on_submit=None):
     # User Query:
-    with              st.   chat_message(         'user' , avatar=hm_avatar)      :st.markdown(query)
-    st.session_state    .messages.append({'role' :'user' , 'content':query})
+    with              st.   chat_message(          'user' , avatar=hm_avatar)      :st.markdown(query)
+    st.session_state    .messages.append({'role' : 'user' , 'content':query})
     # Assistant Response:
     with              st.   chat_message('assistant'     , avatar=ai_avatar):
         response  =   st.session_state.chat.send_message            (query)
