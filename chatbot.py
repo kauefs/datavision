@@ -81,8 +81,7 @@ if not st.session_state.greetings:
     st.session_state.greetings= True
 # Chat History with Custom Avatars
 for message in st.session_state.messages:
-    avatar=ai_avatar if message['role']=='assistant'
-else hm_avatar
+    avatar=ai_avatar if message['role']=='assistant'else hm_avatar
     with       st.chat_message(message['role'], avatar=avatar):st.markdown(message['content'])
 # Chat InPut
 if query    := st.chat_input(placeholder='Type message here…', max_chars=None, disabled=False, on_submit=None):
