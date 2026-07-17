@@ -2,11 +2,11 @@ import  streamlit           as st
 import  google.generativeai as genai
 st.set_page_config(page_title='ƊⱭȾɅViƧi🧿Ƞ&trade; ChatBot', page_icon='🧿', layout='wide', initial_sidebar_state='collapsed')
 # API-KEY
-if api_key in st.secrets:api_key=st.secrets['api_key']
-else  :
-    st.error('Missing API Key!')
-    st.stop( )
-genai.configure(api_key=api_key)
+if 'api_key' in st.secrets:api_key=st.secrets['api_key']
+else   :
+    st .error('Missing API Key!')
+    st .stop( )
+genai  .configure(api_key=api_key)
 # Session State
 if 'messages' not in st.session_state:st.session_state.messages=[ ]
 # SIDE
