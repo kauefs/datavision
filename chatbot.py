@@ -1,11 +1,13 @@
 import  streamlit           as st
 import  google.generativeai as genai
-st.set_page_config(page_title='ƊⱭȾɅViƧi🧿Ƞ ChatBot', page_icon='🧿', layout='wide', initial_sidebar_state='collapsed')
+st.set_page_config(page_title='ƊⱭȾɅViƧi🧿Ƞ&trade; ChatBot', page_icon='🧿', layout='wide', initial_sidebar_state='collapsed')
 # API-KEY
-api_key=st.secrets['api_key']
+if api_key in st.secrets:api_key=st.secrets['api_key']
+else  :
+    st.error('Missing API Key!')
+    st.stop( )
 genai.configure(api_key=api_key)
-# Session State:
-st.session_state.setdefault(None)
+# Session State
 if 'messages' not in st.session_state:st.session_state.messages=[ ]
 # SIDE
 st.sidebar.image   ('https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg')
@@ -13,7 +15,7 @@ st.sidebar.markdown('[![Gemini](https://img.shields.io/badge/Powered_by_Google_G
 st.sidebar.title   ('ƊⱭȾɅViƧi🧿Ƞ&trade;')
 st.sidebar.divider ( )
 st.sidebar.info    (     'ViƧi🧿Ƞ'       )
-st.sidebar.success ('ƊⱭȾɅ Assistant'    )
+st.sidebar.success ('ƊⱭȾɅ Assistant'     )
 st.sidebar.divider ( )
 st.sidebar.markdown('''
 ![2025.05.15  ](https://img.shields.io/badge/2025.05.15-000000)
@@ -30,16 +32,16 @@ st.sidebar.markdown('''
 # MAIN
 st.title    ('ƊⱭȾɅViƧi🧿Ƞ&trade;')
 st.header   (    'ViƧi🧿Ƞ'        )
-st.subheader(    'ƊⱭȾɅ Assistant')
+st.subheader('ƊⱭȾɅ Assistant'     )
 st.divider( )
-# Model:
+# Model
 model_name        =  'gemini-2.5-flash-lite'
 generation_config = {'candidate_count'  : 1   ,
                      'temperature'      :  .75,
                      'top_p'            :  .95,
                      'top_k'            : 3   ,
                      'stop_sequences'   : None,
-                     'max_output_tokens': 16384}
+                     'max_output_tokens': 8192}
 safety_settings   = {'HATE'             :'BLOCK_ONLY_HIGH',
                      'HARASSMENT'       :'BLOCK_ONLY_HIGH',
                      'SEXUAL'           :'BLOCK_ONLY_HIGH',
@@ -58,38 +60,44 @@ system_instruction='''
                         * friendly and warm in interactions.
                         * efficient and resourceful in providing information and solutions.
 
-                      {query}
-
+                     {query}
+                   
                    '''
-model             =genai.GenerativeModel(model_name       =     model_name,
-                                    generation_config     =generation_config,
-                                        safety_settings   =    safety_settings,
-                                        system_instruction=    system_instruction,
-                                         tools            =     tools)
-# Chat:
 ai_avatar         ='🧿'
 hm_avatar         ='🧐'
-chat              =model.  start_chat(history=[ ])
-start             = chat.   send_message(system_instruction.format(query='Prompt'))
-# Initialize Chat Session:
-if 'chat' not in      st.session_state:
-    st.session_state    .chat     =chat
-    st.session_state    .greetings=False
-# Greetings:
+if 'model' not in st.session_state:
+    st.session_state.model=genai.GenerativeModel(model_name       =     model_name,
+                                            generation_config     =generation_config,
+                                                safety_settings   =    safety_settings,
+                                                system_instruction=    system_instruction,
+                                                 tools            =     tools)
+    # StateFul Chat Session
+    st.session_state.chat     =st.session_state.model.start_chat(history=[ ])
+    st.session_state.greetings=           False
+# Greetings
 if not st.session_state.greetings:
-    with st             .   chat_message('assistant', avatar=ai_avatar):st.markdown(start.text)
-    st.session_state    .greetings= True
-# Chat History:
-for message   in      st.session_state.messages:
-    with              st.chat_message(message     ['role'], avatar=message['role']):st.markdown(message['content'])
-# Chat InPut:
-if query         :=   st.   chat_input(placeholder='Type message here…', max_chars=None, disabled=False, on_submit=None):
-    # User Query:
-    with              st.   chat_message(          'user' , avatar=hm_avatar)      :st.markdown(query)
-    st.session_state    .messages.append({'role' : 'user' , 'content':query})
-    # Assistant Response:
-    with              st.   chat_message('assistant'     , avatar=ai_avatar):
-        response  =   st.session_state.chat.send_message            (query)
-        st.markdown(response.text)
-    st.session_state    .messages.append({'role':'assistant','content':response.text})
+    greeting='Hi! I am **ViƧi🧿Ƞ**, your ƊⱭȾɅ assistant. How can I help you navigate your data science, machine learning, or computer vision tasks today?'
+    st.session_state.messages.append({'role':'assistant','content':greeting})
+    st.session_state.greetings= True
+# Chat History with Custom Avatars
+for message in st.session_state.messages:avatar=ai_avatar if message['role']=='assistant'
+else hm_avatar
+    with       st.chat_message(message['role'], avatar=avatar):st.markdown(message['content'])
+# Chat InPut
+if query    := st.chat_input(placeholder='Type message here…', max_chars=None, disabled=False, on_submit=None):
+    # User Query
+    with       st.chat_message(     'user', avatar=hm_avatar):st.markdown(query)
+    st.session_state  .messages.append({'role'    :'user'    , 'content': query})
+    # Assistant Response
+    with       st.chat_message('assistant', avatar=ai_avatar):
+        with   st.spinner('Analyzing…'):
+            try:
+                response=  st.session_state.chat.send_message            (query)
+                text=response.text
+                st.markdown  (text)
+            except Exception as e:
+                text=f'Apologies, I encountered an issue processing that query: {str(e)}'
+                st.error     (text)
+    # Save Assistant Response
+    st.session_state.messages.append({'role':'assistant','content':text})
 st.toast('ƊⱭȾɅViƧi🧿Ƞ&trade;', icon='🧿')
