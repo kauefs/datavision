@@ -76,7 +76,8 @@ if 'model' not in st.session_state:
     st.session_state.greetings=           False
 # Greetings
 if not st.session_state.greetings:
-    greeting='Hi! I am **ViƧi🧿Ƞ**, your ƊⱭȾɅ assistant. How can I help you navigate your data science, machine learning, or computer vision tasks today?'
+    greeting='Hi! I am **ViƧi🧿Ƞ**, your ƊⱭȾɅ Assistant.\
+              How can I help you navigate your data science, machine learning, or computer vision tasks today?'
     st.session_state.messages.append({'role':'assistant','content':greeting})
     st.session_state.greetings= True
 # Chat History with Custom Avatars
