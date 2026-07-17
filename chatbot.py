@@ -80,7 +80,8 @@ if not st.session_state.greetings:
     st.session_state.messages.append({'role':'assistant','content':greeting})
     st.session_state.greetings= True
 # Chat History with Custom Avatars
-for message in st.session_state.messages:avatar=ai_avatar if message['role']=='assistant'
+for message in st.session_state.messages:
+    avatar=ai_avatar if message['role']=='assistant'
 else hm_avatar
     with       st.chat_message(message['role'], avatar=avatar):st.markdown(message['content'])
 # Chat InPut
